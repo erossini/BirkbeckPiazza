@@ -36,253 +36,189 @@ decisions and include a diagram to demonstrate your implementation.
 
 ## 3. Coursework phases
 
-**Phase A: Install and deploy software in virtualised environments [ 10 marks]**
+### Phase A: Install and deploy software in virtualised environments[10 marks]
 
-- Install all the necessary packages in your virtual machine.
-- Deploy your code in the virtual machine using your GitHub repository.
-- Your REST API endpoints should be available under your virtual machine IP address based on
-    examples and guidelines seen in class.
-- Provide a short description of your setup in the report.
-- Briefly discuss your installation and the structure of your folders.
-    ̈ Provide screenshots if necessary.
-- Do not include Linux commands in the report.
+· Install all the necessary packages in your virtual machine.
+· Deploy your code in the virtual machine using your GitHub repository.
+· Your REST API endpoints should be availble under your virtual machine IP address based on examples and guidelines seen in class.
+· Provide a short description of your setup in the report.
+· Briefly discuss your installation and the structure of your folders.
 
-**Phase B: Enforcing authentication/verification functionalities [5 marks]**
+Provide screenshots if necessary.
 
-- Your service should include user management and JWT functionality using NodeJS.
-    ̈ The JWT will authorise the auctioning RESTful API to store data for authorised users
-       in your database.
-    ̈ You can use a MongoDB database for storing data required in the coursework, as shown
-       in the labs.
-- Your code should authenticate users each time you perform any action point of the following
-    Part C, for example, whenever users post, interact, or browse messages.
-       ̈ Unauthorised users are not allowed to access your resources and perform database
-          requests.
-- Any user input should follow a verification process for validation purposes. You are encouraged
-    to improvise and apply your validations.
+· Do not include Linux commands in the report.
 
-**Phase C: Development of Piazza RESTful APIs [ 30 marks]**
+### Phase B: Enforcing authentication/verification functionalities [5 marks]
 
-- Your APIs should allow the basic functionalities provided in the Action points of Section 2.
-- Each post on the **Piazza** wall should include the following data:
-       ̈* The post identifier.
-       ̈* The title of a post.
-       * The topic of a post from one of the following four categories: Politics, Health, Sport or Tech. Each post could belong to one or more topics.
-       * A timestamp of the post-registration in the **Piazza** API.
-       * The message body of a post.
-       * The post-expiration time. After the end of this time, the message will remain on the Piazza wall, but it will not accept any further actions, e.g. (likes, dislikes, or comments).
-       *  The status of a post could be “Live” or “Expired”.
-       * Information about the post owner (e.g., a name).
-       * The number of likes, dislikes, or a list of comments, if any.
-       * Any other information you might need to store essential for your project.
-- Each user interaction with a post on a topic (like, dislike or comment) should include the following data:
-       ̈* Information about the user interacting with the post of a topic (e.g., a name).
-       ̈* The interaction value (including a like, a dislike, or a comment made).
-       ̈* The time left for a post to expire.
-       ̈* Any other information you can store essential for your project.
-- You are encouraged to develop your database collections and application logic and expand Phase C as required.
-       ̈* Provide a brief description of your database models in the report.
-       ̈* Use screenshots if necessary.
-- You should list the RESTful API endpoints in your report with a simple example of using your API.
-- Consider the following.
-    ̈*  Only authorised users should access the API.
-    ̈* The API should allow any registered user to perform posts.
-    ̈* You are encouraged to set any other constraints to improve the software's functionality.
-    ̈* You are encouraged to improvise and develop any functionality you like.
+·Your service should include user management and JWT functionality using NodeJS.
 
-**Phase D: Testing your application [15 marks]**
+The JWT will authorise the auctioning RESTful API to store data for authorised users in your database.
 
-You can demonstrate the testing aspects of your software using Postman, e.g., by including screenshots
-in the report or by developing a sting application. For example, you can develop a testing application
-using Node.js or Python to automate the test cases of users posting messages. This application should
-be developed outside your virtual machine, e.g., on your desktop or laptop. The testing application
-should connect to the API endpoints and perform the required HTTP calls to manipulate data. The test
-cases should demonstrate Action points, as described in Section 2. The test cases will verify your system
-functionality.
+You can use a MongoDB database for storing data required in the coursework, as shown in the labs.
 
-Let us assume a use case scenario of four users, Olga, Nick, Mary, and Nestor, accessing the Piazza
-API. Provide the following test cases (TCs).
+·Your code should authenticate users each time you perform any action point of the following Part C,for example,whenever users post, interact, or browse messages.
 
-**TC 1.** Olga, Nick, Mary, and Nestor register and are ready to access the **Piazza** API.
-**TC 2.** Olga, Nick, Mary, and Nestor use the oAuth v2 authorisation service to register and get
-their tokens.
-**TC 3.** Olga makes a call to the API without using her token. This call should be unsuccessful as
-the user is unauthorised.
-**TC 4.** Olga posts a message in the Tech topic with an expiration time (e.g. 5 minutes) using her
-token. After the end of the expiration time, the message will not accept any further user
-interactions (likes, dislikes, or comments).
-**TC 5.** Nick posts a message in the Tech topic with an expiration time using his token.
-**TC 6.** Mary posts a message in the Tech topic with an expiration time using her token.
-**TC 7.** Nick and Olga browse all the available posts in the Tech topic; three posts should be
-available with zero likes, zero dislikes and no comments.
-**TC 8.** Nick and Olga “like” Mary’s post on the Tech topic.
-**TC 9.** Nestor “likes” Nick’s post and “dislikes” Mary’s on the Tech topic.
-**TC 10.** Nick browses all the available posts on the Tech topic; at this stage, he can see the number
-of likes and dislikes for each post (Mary has two likes and one dislike, and Nick has one
-like). There are no comments made yet.
-**TC 11.** Mary likes her post on the Tech topic. This call should be unsuccessful; in **Piazza,** a post
-owner cannot like their messages.
-**TC 12.** Nick and Olga comment on Mary’s post on the Tech topic in a round-robin fashion (one
-after the other, adding at least two comments each).
-**TC 13.** Nick browses all the available posts in the Tech topic; at this stage, he can see the number
-of likes and dislikes of each post and the comments made.
-**TC 14.** Nestor posts a message in the Health topic with an expiration time using her token.
-**TC 15.** Mary browses all the available posts on the Health topic; at this stage, she can see only
-Nestor’s post.
-**TC 16.** Mary posts a comment in Nestor’s message on the Health topic.
-**TC 17.** Mary dislikes Nestor’s message on the Health topic after the end of post-expiration time.
-This should fail.
-**TC 18.** Nestor browses all the messages on the Health topic. There should be only one post (his
-own) with one comment (Mary’s).
-**TC 19.** Nick browses all the expired messages on the Sports topic. These should be empty.
-**TC 20.** Nestor queries for an active post with the highest interest (maximum number of likes and
-dislikes) in the Tech topic. This should be Mary’s post.
+Unauthorised users are not allowed to access your resources and perform database requests.
 
-Feel free to develop more test cases to test your implementations. You should provide screenshots or
-descriptions of each test case in the report.
+·Any user input should follow a verification process for validation purposes. You are encouraged to improvise and apply your validations.
 
-**Phase E: Deploy your Piazza project into a VM using Docker [10 marks]**
+### Phase C: Development of Piazza RESTful APIs [30 marks]
 
-Upload your code to a GitHub repo and then deploy it in a Google Cloud VM. Provide a list of
-commands in the report and screenshots to demonstrate your deployment actions. As an alternative, you
-can use DockerHub.
+·Your APIs should allow the basic functionalities provided in the Action points of Section 2.
 
-**Phase F: Report your solution in a technical report [ 20 marks]**
+·Each post on the Piazza wall should include the following data:
 
-Provide details on your implementations, database design, service descriptions, API resources, and any
-other information required. You do not need to include a list of the Linux commands in the report.
-Provide references to online resources, including source codes from online tutorials or repositories.
-There is no report size, but you should keep the report short and solid regarding the development
-phases.
+The post identifier.
 
-**Phase G: Submit quality scripts [ 10 marks]**
+The title of a post.
 
-Your codes should be written in such a way that makes them highly readable and easy to follow. Good
-use of REST concepts, understanding of computational complexity in software development, use of
-comments in code, proper database models, proper indentation, clear notations, and simplicity in the
-flow are factors to consider.
+The topic of a post from one of the following four categories: Politics, Health, Sport or Tech. Each post could belong to one or more topics.
 
-**Phase H: Go beyond the coursework requirements [0 marks]**
+A timestamp of the post-registration in the Piazza API.
 
-Feel free to create your application name, and don’t forget to design your logo! Improvise and expand
-the Piazza functionalities. Using CI/CD pipelines with Terraform to deploy or develop a front-end could
-highlight some of these areas.
+The message body of a post.
+
+The post-expiration time. After the end of this time, the message will remain on the Piazza wall, but it will not accept any further actions,e.g.(likes, dislikes, or comments).
+
+The status of a post could be “Live”or “Expired”.
+
+Information about the post owner(e.g.,a name).
+
+The number of likes, dislikes, or a list of comments, if any.
+
+Any other information you might need to store essential for your project.
+
+·Each user interaction with a post on a topic (like, dislike or comment) should includethe following data:
+
+Information about the user interacting with the post of a topic (e.g., a name).
+
+The interaction value (including a like, a dislike, or a comment made).
+
+The time left for a post to expire.
+
+Any other information you can store essential for your project.
+
+· You are encouraged to develop your database collections and application logic and expand Phase C as required.
+
+Provide a brief description of your database models in the report.
+
+Use screenshots if necessary.
+
+· You should list the RESTful API endpoints in your report with a simple example of using your API.
+
+·Consider the following.
+
+Only authorised users should access the API.
+
+The API should allow any registered user to perform posts.
+
+You are encouraged to set any other constraints to improve the software's functionality.
+
+You are encouraged to improvise and develop any functionality you like.
+
+### Phase D: Testing your application [15 marks]
+
+You can demonstrate the testing aspects of your software using Postman, e.g., by including screenshots in the report or by developing a sting application. For example, you can develop a testing application using Node.js or Python to automate the test cases of users posting messages. This application should be developed outside your virtual machine, e.g., on your desktop or laptop. The testing application should connect to the API endpoints and perform the required HTTP calls to manipulate data. The test cases should demonstrate Action points, as described in Section 2. The test cases will verify your system functionality.
+
+Let us assume a use case scenario of four users, Olga, Nick, Mary, and Nestor, accessing the Piazza API. Provide the following test cases (TCs).
+
+TC 1. Olga, Nick, Mary, and Nestor register and are ready to access the Piazza API.
+
+TC 2. Olga,Nick, Mary, and Nestor use the oAuth v2 authorisation service to register and get their tokens.
+
+TC 3. Olga makes a call to the API without using her token. This call should be unsuccessful as the user is unauthorised.
+
+TC4. Olga posts a message in the Tech topic with an expiration time (e.g.5 minutes) using her token.After the end of the expiration time, the message will not accept any further user interactions (likes, dislikes, or comments).
+
+TC 5. Nick posts a message in the Tech topic with an expiration time using his token.
+
+TC 6.Mary posts a message in the Tech topic with an expiration time using her token.
+
+TC 7. Nick and Olga browse all the available posts in the Tech topic;three posts should be available with zero likes, zero dislikes and no comments.
+
+TC 8. Nick and Olga “like” Mary's post on the Tech topic.
+
+TC 9. Nestor “likes" Nick's post and "dislikes” Mary's on the Tech topic.
+
+TC 10. Nick browses all the available posts on the Tech topic; at this stage, he can see the number of likes and dislikes for each post (Mary has two likes and one dislike, and Nick has one like).There are no comments madeyet.
+
+TC 11. Mary likes her post on the Tech topic. This call should be unsuccessful; in Piazza, a post owner cannot like their messages.
+
+TC 12. Nick and Olga comment on Mary's post on the Tech topic in a round-robin fashion (one after the other,adding at least two comments each).
+
+TC 13. Nick browses all the available posts in the Tech topic;at this stage,he can see the number of likes and dislikes of each post and the comments made.
+
+TC 14. Nestor posts a message in the Health topic with an expiration time using her token.
+
+TC 15. Mary browses all the available posts on the Health topic; at this stage, she can see only Nestor's post.
+
+TC 16. Mary posts a comment in Nestor's message on the Health topic.
+
+TC 17. Mary dislikes Nestor's message on the Health topic after the end of post-expiration time.This should fail.
+
+TC 18. Nestor browses all the messages on the Health topic. There should be only one post(his own) with one comment(Mary's).
+
+TC 19. Nick browses all the expired messages on the Sports topic. These should be empty.
+
+TC 20. Nestor quries for an active post with the highest interest (maximum number of likes and dislikes) in the Tech topic. This should be Mary's post.
+
+Feel free to develop more test cases to test your implementations. You should provide screenshots or descriptions of each test case in the report.
+
+### Phase E: Deploy your Piazza project into a VM using Docker [10 marks]
+
+Upload your code to a GitHub repo and then deploy it in a Google Cloud VM. Provide a list of commands in the report and screenshots to demonstrate your deployment actions. As an alternative,you can use DockerHub.
+
+### Phase F: Report your solution in a technical report [20 marks]
+
+Provide details on your implementations, database design, service descriptions, API resources,and any other information required. You do not need to include a list of the Linux commands in the report.Provide references to online resources, including source codes from online tutorials or repositories.There is no report size, but you should keep the report short and solid regarding the development phases.
+
+### Phase G: Submit quality scripts [10 marks]
+
+Your codes should be written in such a way that makes them highly readable and easy to follow.Good use of REST concepts, understanding of computational complexity in software development, useof comments in code, proper database models, proper indentation, clear notations,and simplicity in the flow are factors to consider.
+
+### Phase H: Go beyond the coursework requirements [0 marks]
+
+Feel free to create your application name, and don't forget to design your logo! Improvise and expand the Piazza functionalities. Using CI/CD pipelines with Terraform to deploy or develop a front-end could highlight some of these areas.
 
 ## 4. General coursework guidelines
 
 Consider the following when developing your software.
 
-- You should provide solutions using Node.js, MongoDB and Postman to test your endpoints.
-- As seen in class, you are encouraged to reuse the lab tutorials to deploy and develop software.
-- Follow the instructions of the coursework brief and coursework description on the Moodle page
-    for the time and mode of submission of your software.
-- Provide comments to explain key functionalities and implementations.
-- Whenever necessary, provide screenshots of your API calls to demonstrate functionality.
-- Provide a clear description and example of your API endpoints in the report.
+·You should provide solutions using Node.js, MongoDB and Postman to test your endpoints.
+
+·As seen in class, you are encouraged to reuse the lab tutorials to deploy and develop software.
+
+·Follow the instructions of the coursework brief and coursework description on the Moodle page for the time and mode of submission of your software.
+
+·Provide comments to explain key functionalities and implementations.
+
+·Whenever necessary,provide screenshots of your API calls to demonstrate functionality.
+
+Provide a clear description and example of your API endpoints in the report.
+
+·There is no limit to the report size.
+
+·Provide clear explanations of the test casesand future work.
+
+·The coursework requires you to create database tables in MongoDB to save yourdata so you can improvise as needed.
+
+· Consider that there could be multiple ways to implement tables to manage the data of your developments.
+
+### Assignment Marking Criteria
 
 
-- There is no limit to the report size.
-- Provide clear explanations of the test cases and future work.
-- The coursework requires you to create database tables in MongoDB to save your data so you
-    can improvise as needed.
-- Consider that there could be multiple ways to implement tables to manage the data of your
-    developments.
-
-## Assignment Marking Criteria
-
-| Part of assessment                                               | Criteria                                                                        | Marks |
-|------------------------------------------------------------------|---------------------------------------------------------------------------------|-------|
-| Phase A: Install and deploy software in virtualised environments | a) Install all the necessary packages in your virtual machine.                  |    10 |
-|                                                                  | b) Deploy your code in the virtual machine using your GitHub repository.        |       |
-|                                                                  | c) REST API endpoints should be available under your virtual machine IP         |       |
-|                                                                  | address based on examples and guidelines seen in class. Provide screenshots.    |       |
-|                                                                  | d) Provide a short description of your setup in the report.                     |       |
-|                                                                  | e) Discussion of installation and the structure of your folders.                |       |
-|------------------------------------------------------------------|---------------------------------------------------------------------------------|-------|
-
-```
-a) Install all the necessary packages in your virtual machine.
-b) Deploy your code in the virtual machine using your GitHub repository.
-c) REST API endpoints should be available under your virtual machine IP address based on examples and guidelines seen in class. Provide screenshots.
-d) Provide a short description of your setup in the report.
-e) Discussion of installation and the structure of your folders.
-```
-
-### 10
-
-```
-Phase B: Enforcing
-authentication/verification
-functionalities
-```
-```
-a) User management and JWT functionality using NodeJS.
-b) Authenticate users each time you perform any action point.
-c) Complete verification process for validation purposes.
-```
-### 5
-
-```
-Phase C: Development of
-Piazza RESTful APIs
-```
-```
-a) Implement basic functionalities provided in the Action
-points of Section 2.
-b) Complete requirements as discussed in Phase C section.
-```
-### 30
-
-```
-Phase D: Testing your
-application
-```
-```
-a) Demonstrate testing of application by either using
-screenshots of postman, or by developing a testing
-application e.g., using Node.js or Python to test endpoints, or
-by any other use of testing libraries.
-b) Discuss and document test cases either by including
-screenshots or code samples.
-c) Complete implementation of the twenty use cases as
-presented in section Phase D.
-```
-### 15
+| Part of assessment | Criteria | Marks |
+| -- | -- | -- |
+| Phase A: Install anddeploy software invirtualised environments | a) Install all the necessary packages in your virtual machine.b) Deploy your code in the virtual machine using yourGitHub repository.c) REST API endpoints should be available under yourvirtual machine IP address based on examples and guidelinesseen in class. Provide screenshots.d) Provide a short description of your setup in the report.e) Discussion of installation and the structure of your folders. | 10 |
+| Phase B: Enforcingauthentication/verificationfunctionalities | a) User management and JWT functionality using NodeJS.b) Authenticate users each time you perform any action point.c) Complete verification process for validation purposes. | 5 |
+| Phase C:Development ofPiazza RESTful APIs | a) Implement basic functionalities provided in the Actionpoints of Section 2.b) Complete requirements as discussed in Phase C section. | 30 |
+| Phase D:Testing yourapplication | a) Demonstrate testing of application by either usingscreenshots of postman, or by developing a testingapplication e.g.,using Node.js or Python t test endpoints, orby any other use of testing libraries.b) Discuss and document test cases either by includingscreenshots or code samples.c) Complete implementation of the twenty use cases aspresented in section Phase D. | 15 |
+| Phase E:Deploy yourPiazza project into a VMusing Docker | Upload code to a GitHub repository and then deploy it in aGoogle Cloud VM.Provide a list of commands in the reportand screenshots to demonstrate your deployment actions.Asan alternative,DockerHub can be used. | 10 |
+| Phase F: Report yoursolution in a technicalreport | a) Provide details on your implementations, database design,service descriptions, API resources, and any otherinformation required.b) Provide references using the Harvard referencing systemas needed in the report | 20 |
+| Phase G:Submit qualityscripts | Code samples should be written in such a way that makesthem highly readable and easy to follow. Good use of RESTconcepts, understanding of computational complexity insoftware development, use of comments in code, properdatabase models, proper indentation, clear notations, andsimplicity in the flow are factors to consider. | 10 |
+|  |  | 100 |
 
 
-Phase E: Deploy your
-Piazza project into a VM
-using Docker
 
-```
-Upload code to a GitHub repository and then deploy it in a
-Google Cloud VM. Provide a list of commands in the report
-and screenshots to demonstrate your deployment actions. As
-an alternative, DockerHub can be used.
-```
-### 10
 
-Phase F: Report your
-solution in a technical
-report
 
-```
-a) Provide details on your implementations, database design,
-service descriptions, API resources, and any other
-information required.
-b) Provide references using the Harvard referencing system
-as needed in the report
-```
-### 20
-
-Phase G: Submit quality
-scripts
-
-```
-Code samples should be written in such a way that makes
-them highly readable and easy to follow. Good use of REST
-concepts, understanding of computational complexity in
-software development, use of comments in code, proper
-database models, proper indentation, clear notations, and
-simplicity in the flow are factors to consider.
-```
