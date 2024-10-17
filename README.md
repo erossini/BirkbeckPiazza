@@ -19,14 +19,14 @@ your developments as described in Section 3.
 
 **Piazza** should support the following actions.
 
-| Action       | Description                                                                                                  |
-|--------------|--------------------------------------------------------------------------------------------------------------|
-| Action 1     | Authorised users access the Piazza API using the oAuth v2 protocol to perform any interaction.               |
-| Action 2     | Authorised users post a message for a particular topic in the Piazza API.                                    |
-| Action 3     | Registered users browse messages per topic using the Piazza API.                                             |
+| Action       | Description                                                                                                        |
+|--------------|--------------------------------------------------------------------------------------------------------------------|
+| Action 1     | Authorised users access the Piazza API using the oAuth v2 protocol to perform any interaction.                     |
+| Action 2     | Authorised users post a message for a particular topic in the Piazza API.                                          |
+| Action 3     | Registered users browse messages per topic using the Piazza API.                                                   |
 | Action 4     | Registered users perform basic operations, including “like”, “dislike”, or “comment” a message posted for a topic. |
-| Action 5     | Authorised users could browse for the most active post per topic with the highest likes and dislikes.        |
-| Action 6     | Authorised users could browse the history data of expired posts per topic.                                   |
+| Action 5     | Authorised users could browse for the most active post per topic with the highest likes and dislikes.              |
+| Action 6     | Authorised users could browse the history data of expired posts per topic.                                         |
 
 You recommended using the Node.js Express package and MongoDB to develop your software. If you
 like, you can use any other programming framework or database you prefer. You are advised to use code
@@ -38,83 +38,51 @@ decisions and include a diagram to demonstrate your implementation.
 
 ### Phase A: Install and deploy software in virtualised environments[10 marks]
 
-· Install all the necessary packages in your virtual machine.
-· Deploy your code in the virtual machine using your GitHub repository.
-· Your REST API endpoints should be availble under your virtual machine IP address based on examples and guidelines seen in class.
-· Provide a short description of your setup in the report.
-· Briefly discuss your installation and the structure of your folders.
-
-Provide screenshots if necessary.
-
-· Do not include Linux commands in the report.
+- Install all the necessary packages in your virtual machine.
+- Deploy your code in the virtual machine using your GitHub repository.
+- Your REST API endpoints should be availble under your virtual machine IP address based on examples and guidelines seen in class.
+- Provide a short description of your setup in the report.
+- Briefly discuss your installation and the structure of your folders.
+    - Provide screenshots if necessary.
+- Do not include Linux commands in the report.
 
 ### Phase B: Enforcing authentication/verification functionalities [5 marks]
 
-·Your service should include user management and JWT functionality using NodeJS.
-
-The JWT will authorise the auctioning RESTful API to store data for authorised users in your database.
-
-You can use a MongoDB database for storing data required in the coursework, as shown in the labs.
-
-·Your code should authenticate users each time you perform any action point of the following Part C,for example,whenever users post, interact, or browse messages.
-
-Unauthorised users are not allowed to access your resources and perform database requests.
-
-·Any user input should follow a verification process for validation purposes. You are encouraged to improvise and apply your validations.
+- Your service should include user management and JWT functionality using NodeJS.
+    - The JWT will authorise the auctioning RESTful API to store data for authorised users in your database.
+    - You can use a MongoDB database for storing data required in the coursework, as shown in the labs.
+- Your code should authenticate users each time you perform any action point of the following Part C,for example,whenever users post, interact, or browse messages.
+    - Unauthorised users are not allowed to access your resources and perform database requests.
+- Any user input should follow a verification process for validation purposes. You are encouraged to improvise and apply your validations.
 
 ### Phase C: Development of Piazza RESTful APIs [30 marks]
 
-·Your APIs should allow the basic functionalities provided in the Action points of Section 2.
-
-·Each post on the Piazza wall should include the following data:
-
-The post identifier.
-
-The title of a post.
-
-The topic of a post from one of the following four categories: Politics, Health, Sport or Tech. Each post could belong to one or more topics.
-
-A timestamp of the post-registration in the Piazza API.
-
-The message body of a post.
-
-The post-expiration time. After the end of this time, the message will remain on the Piazza wall, but it will not accept any further actions,e.g.(likes, dislikes, or comments).
-
-The status of a post could be “Live”or “Expired”.
-
-Information about the post owner(e.g.,a name).
-
-The number of likes, dislikes, or a list of comments, if any.
-
-Any other information you might need to store essential for your project.
-
-·Each user interaction with a post on a topic (like, dislike or comment) should includethe following data:
-
-Information about the user interacting with the post of a topic (e.g., a name).
-
-The interaction value (including a like, a dislike, or a comment made).
-
-The time left for a post to expire.
-
-Any other information you can store essential for your project.
-
-· You are encouraged to develop your database collections and application logic and expand Phase C as required.
-
-Provide a brief description of your database models in the report.
-
-Use screenshots if necessary.
-
-· You should list the RESTful API endpoints in your report with a simple example of using your API.
-
-·Consider the following.
-
-Only authorised users should access the API.
-
-The API should allow any registered user to perform posts.
-
-You are encouraged to set any other constraints to improve the software's functionality.
-
-You are encouraged to improvise and develop any functionality you like.
+- Your APIs should allow the basic functionalities provided in the Action points of Section 2.
+- Each post on the Piazza wall should include the following data:
+    - The post identifier.
+    - The title of a post.
+    - The topic of a post from one of the following four categories: Politics, Health, Sport or Tech. Each post could belong to one or more topics.
+    - A timestamp of the post-registration in the Piazza API.
+    - The message body of a post.
+    - The post-expiration time. After the end of this time, the message will remain on the Piazza wall, but it will not accept any further actions,e.g.(likes, dislikes, or comments).
+    - The status of a post could be “Live”or “Expired”.
+    - Information about the post owner(e.g.,a name).
+    - The number of likes, dislikes, or a list of comments, if any.
+    - Any other information you might need to store essential for your project.
+- Each user interaction with a post on a topic (like, dislike or comment) should includethe following data:
+    - Information about the user interacting with the post of a topic (e.g., a name).
+    - The interaction value (including a like, a dislike, or a comment made).
+    - The time left for a post to expire.
+    - Any other information you can store essential for your project.
+- You are encouraged to develop your database collections and application logic and expand Phase C as required.
+    - Provide a brief description of your database models in the report.
+    - Use screenshots if necessary.
+- You should list the RESTful API endpoints in your report with a simple example of using your API.
+- Consider the following.
+    - Only authorised users should access the API.
+    - The API should allow any registered user to perform posts.
+    - You are encouraged to set any other constraints to improve the software's functionality.
+    - You are encouraged to improvise and develop any functionality you like.
 
 ### Phase D: Testing your application [15 marks]
 
