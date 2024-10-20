@@ -1,0 +1,36 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Piazza",
+    "collectionId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+    "dateExported": "2024-10-20T11:02:30.343Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "6086ac11-14fa-4134-b2d5-13b286e2d320",
+            "name": "Users",
+            "containerId": "",
+            "created": "2024-10-20T09:43:26.795Z",
+            "sortNum": 10000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "53d887c3-5ac4-484f-b6b1-c8b4a32c1a6c",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "6086ac11-14fa-4134-b2d5-13b286e2d320",
+            "name": "Register a new user",
+            "url": "{{url}}/api/users/register",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-10-20T09:44:05.574Z",
+            "modified": "2024-10-20T09:53:58.271Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"erossi03@student.birkbeck.ac.uk\",\n  \"username\": \"test\",\n  \"password\": \"Test!2024\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "PLsxRSaGo6jJsx5GZwyjjgto8zsZ9g66uJkmx9M-9br6_lOzacNZ8LA1x5jBJUngO306F87GT6HtpgARHwaybA"
+}

@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 
 // importing routes (middleware)
+const postRoute = require('./routes/posts')
 const userRoute = require('./routes/users')
 
 // define the application
@@ -15,6 +16,7 @@ const app = express()
 app.use(bodyParser.json());
 
 // add routes
+app.use('/api/posts', postRoute);
 app.use('/api/users', userRoute);
 
 // open the connection with the database
