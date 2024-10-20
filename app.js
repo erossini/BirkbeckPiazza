@@ -28,6 +28,11 @@ mongoose.connect('mongodb+srv://erossi03:pw2JwAaSU1tLi100q@cluster0.j09uw.mongod
         console.error('Error connection to MongoDB', err)
     });
 
+// add Swagger 
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./swagger.json');
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.listen(3000, () => {
     console.log('The application Piazza is up and running')
 });
