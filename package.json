@@ -1,0 +1,32 @@
+{
+  "name": "piazza",
+  "version": "1.0.0",
+  "description": "Piazza is a project for the Cloud Computing Concepts Coursework at Birkbeck University of London",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erossini/BirkbeckPiazza.git"
+  },
+  "keywords": [
+    "birkbeck",
+    "node.js",
+    "mongodb",
+    "crud",
+    "SaaS"
+  ],
+  "author": "Enrico Rossini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erossini/BirkbeckPiazza/issues"
+  },
+  "homepage": "https://github.com/erossini/BirkbeckPiazza#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2",
+    "nodemon": "^3.1.7"
+  }
+}
