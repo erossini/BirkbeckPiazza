@@ -3,6 +3,8 @@ const router = express.Router();
 
 const post = require('../models/post');
 
+const verifyToken = require('../validations/verifyToken.js')
+
 router.get('/', async (req, res) => {
     /*
        #swagger.tags = ['Posts']
@@ -11,6 +13,7 @@ router.get('/', async (req, res) => {
        #swagger.description = 'Get all the posts from the collection'
     */
     console.log('Posts');
+    res.status(200).send();
 })
 
 module.exports = router;

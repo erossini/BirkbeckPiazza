@@ -1,9 +1,14 @@
 const express = require('express')
 const router = express.Router();
 
-const User = require('../models/user')
+const bcryptjs = require('bcryptjs')
 
-router.delete('/:userId', async (req, res) => {
+const User = require('../models/user')
+const { registerValidation } = require('../validations/userValidation.js')
+
+const verifyToken = require('../validations/verifyToken.js')
+
+router.delete('/:userId', verifyToken, async (req, res) => {
     /*
         #swagger.tags = ['Users']
         #swagger.path = '/api/users/{userId}'
@@ -19,7 +24,7 @@ router.delete('/:userId', async (req, res) => {
     res.status(200).json({ error: 'User deleted' });
 })
 
-router.delete('/username/:username', async (req, res) => {
+router.delete('/username/:username', verifyToken, async (req, res) => {
     /*
         #swagger.tags = ['Users']
         #swagger.path = '/api/users/username/{username}'
@@ -35,8 +40,7 @@ router.delete('/username/:username', async (req, res) => {
     res.status(200).json({ error: 'User deleted' });
 })
 
-
-router.delete('/email/:email', async (req, res) => {
+router.delete('/email/:email', verifyToken, async (req, res) => {
     /*
         #swagger.tags = ['Users']
         #swagger.path = '/api/users/email/{email}'
@@ -52,7 +56,7 @@ router.delete('/email/:email', async (req, res) => {
     res.status(200).json({ error: 'User deleted' });
 })
 
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     /*
        #swagger.tags = ['Users']
        #swagger.path = '/api/users'
@@ -67,12 +71,11 @@ router.get('/', async (req, res) => {
         res.status(200).send(list);
     }
     catch(err) {
-        console.log('Error retrieving the users: ', err);
         res.status(500).json({ error: 'Error retrieving the users: ', details: err });
     }
 })
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', verifyToken, async (req, res) => {
     /*
        #swagger.tags = ['Users']
        #swagger.path = '/api/users/{userId}'
@@ -88,7 +91,6 @@ router.get('/:userId', async (req, res) => {
         res.status(200).send(userSearchById);
     }
     catch(err) {
-        console.log('User not found: ', err);
         res.status(404).json({ error: 'UserId not found' });
     }
 });
@@ -107,29 +109,47 @@ router.post('/register', async (req, res) => {
                 $email: 'test@test.com',
                 $password: 'password'
             }
-    } */
+        } 
+    */
+
+    const error = registerValidation(req.body)
+    if(error) {
+        return res.status(400).json({ error: 'Validation failed', details: error['details'][0]['message'] })
+    }
 
     const email = req.body.email;
-    if(!email)
-        return res.status(400).json({ error: 'The email is required.' });
-
     const userToVerify = await User.findOne({ email: email });
-    if(userToVerify)
+    if(userToVerify) {
         res.status(404).json({ error: 'This email is already in use.'});
+        return;
+    }
+    const usernameToVerify = await User.findOne({ username: req.body.username });
+    if(usernameToVerify) {
+        res.status(404).json({ error: 'This username is already in use.'});
+        return;
+    }
+
+    const salt = await bcryptjs.genSalt(5)
+    const hashedPassword = await bcryptjs.hash(req.body.password, salt)
 
     // prepare the data to save in the database
     const user = new User({
         username: req.body.username,
         email: email,
-        password: req.body.password
+        password: hashedPassword
     });
 
     // save the user in the database and return the saved user
-    const savedUser = await user.save();
-    res.status(200).send(savedUser);
+    try {
+        const savedUser = await user.save();
+        res.status(200).send(savedUser);
+    }
+    catch(err) {
+        res.status(400).json({ error: 'Error saving the new user', details: err })
+    }
 })
 
-router.get('/searchByEmail/:email', async(req, res) => {
+router.get('/searchByEmail/:email', verifyToken, async(req, res) => {
     /* 
       #swagger.tags = ['Users']
       #swagger.path = '/api/users/searchByEmail/{email}'
