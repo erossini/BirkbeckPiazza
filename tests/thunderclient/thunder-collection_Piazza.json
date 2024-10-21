@@ -2,22 +2,29 @@
     "clientName": "Thunder Client",
     "collectionName": "Piazza",
     "collectionId": "8a2ac410-6441-4c69-a01a-215630ec6921",
-    "dateExported": "2024-10-21T14:57:04.320Z",
+    "dateExported": "2024-10-21T15:39:02.812Z",
     "version": "1.2",
     "folders": [
+        {
+            "_id": "c776c052-edec-43dd-9604-22a262c322b6",
+            "name": "Authentication",
+            "containerId": "",
+            "created": "2024-10-21T10:52:52.545Z",
+            "sortNum": 5000
+        },
+        {
+            "_id": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Posts",
+            "containerId": "",
+            "created": "2024-10-21T14:58:45.521Z",
+            "sortNum": 7500
+        },
         {
             "_id": "6086ac11-14fa-4134-b2d5-13b286e2d320",
             "name": "Users",
             "containerId": "",
             "created": "2024-10-20T09:43:26.795Z",
             "sortNum": 10000
-        },
-        {
-            "_id": "c776c052-edec-43dd-9604-22a262c322b6",
-            "name": "Authentication",
-            "containerId": "",
-            "created": "2024-10-21T10:52:52.545Z",
-            "sortNum": 20000
         }
     ],
     "requests": [
@@ -68,6 +75,23 @@
             "created": "2024-10-20T12:58:14.542Z",
             "modified": "2024-10-20T13:00:25.528Z",
             "headers": []
+        },
+        {
+            "_id": "2548e0fd-cc8b-4299-a434-f3286cfaee6e",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Add a new post",
+            "url": "{{url}}/api/posts",
+            "method": "POST",
+            "sortNum": 65000,
+            "created": "2024-10-21T15:25:24.059Z",
+            "modified": "2024-10-21T15:27:38.146Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"Title test\",\n  \"body\": \"This is a short body for the post.\",\n  \"topic\": \"Tech\",\n  \"owner\": \"6716333378f8aa5dbd56f180\",\n  \"expirationTime\": 36000\n}",
+                "form": []
+            }
         },
         {
             "_id": "55484b15-357d-4b02-a551-5b55dd927edb",
@@ -134,7 +158,31 @@
                 "form": []
             },
             "docs": "This is an example of the response of this call\n\n```json\n{\n  \"auth-token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzE2MzMzMzc4ZjhhYTVkYmQ1NmYxODAiLCJpYXQiOjE3Mjk1MDg4NDl9.iw6PzjYuFY6GaNgE0FEfPL1Hh0dxar19ZZTSz1Zp7h0\"\n}\n```"
+        },
+        {
+            "_id": "61b4399f-f702-4f0c-b442-c3be79d7af52",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Get all posts",
+            "url": "{{url}}/api/posts",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-10-21T14:59:10.118Z",
+            "modified": "2024-10-21T14:59:58.629Z",
+            "headers": []
+        },
+        {
+            "_id": "c1e9c6ff-4293-4753-9c92-d6aa834b3c2e",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Get all posts for a topic",
+            "url": "{{url}}/api/posts/Tech",
+            "method": "GET",
+            "sortNum": 140000,
+            "created": "2024-10-21T15:30:52.065Z",
+            "modified": "2024-10-21T15:36:55.084Z",
+            "headers": []
         }
     ],
-    "ref": "PLsxRSaGo6jJsx5GZwyjjuU2dyMoS_zd3aqPR4Ze3DtCtRtkrp5TDWeJ2dfm7irFleo6jcAx4D0QsDNHkhxCsw"
+    "ref": "PLsxRSaGo6jJsx5GZwyjjsbeLUNySw5ljD51NZ-fyDPE1Mq-9rP_99fZk8a4w5318zntUyJ1Wuu2oZso67CnWA"
 }

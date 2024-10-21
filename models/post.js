@@ -36,17 +36,17 @@ const postSchema = new mongoose.Schema({
         ]
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId, ref: 'user'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     },
     likes: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'user'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }],
     dislikes: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'user'
+        type: mongoose.Schema.Types.ObjectId, ref: 'User'
     }],
     comments: [{
         user: {
-            type: mongoose.Schema.Types.ObjectId, ref: 'user'
+            type: mongoose.Schema.Types.ObjectId, ref: 'User'
         },
         comment: {
             type: String

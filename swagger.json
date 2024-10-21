@@ -19,8 +19,71 @@
         "summary": "Get all posts",
         "description": "Get all the posts from the collection",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Add a new post",
+        "description": "Add a new post to the collection",
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expirationTime": {
+                    "example": "any"
+                  },
+                  "title": {
+                    "example": "any"
+                  },
+                  "body": {
+                    "example": "any"
+                  },
+                  "topic": {
+                    "example": "any"
+                  },
+                  "_id": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/{topic}": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Get all posts for a specific topic",
+        "description": "Get all the posts from the collection",
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This is the topic to filter the posts from the collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -41,11 +104,21 @@
               "type": "string"
             },
             "description": "This is the UserId in the MongoDB collection"
+          },
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -67,11 +140,21 @@
               "type": "string"
             },
             "description": "This is the UserId in the MongoDB collection"
+          },
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -95,11 +178,21 @@
               "type": "string"
             },
             "description": "This is the username for the user to delete in the MongoDB collection"
+          },
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -124,6 +217,13 @@
             }
           },
           {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "username",
             "description": "This is the email for the user to delete in the MongoDB collection",
             "in": "query",
@@ -135,6 +235,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "404": {
             "description": "Not Found"
@@ -258,11 +361,21 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
