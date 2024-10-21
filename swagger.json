@@ -25,27 +25,13 @@
         }
       }
     },
-    "/api/users": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "Get all users",
-        "description": "Get all the users from the collection",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/users/{userId}": {
-      "get": {
+      "delete": {
         "tags": [
           "Users"
         ],
-        "summary": "Get a user by userId",
-        "description": "Get all the users from the collection",
+        "summary": "Delete user by userId",
+        "description": "Delete a user by the userId from the collection",
         "parameters": [
           {
             "name": "userId",
@@ -60,6 +46,118 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a user by userId",
+        "description": "Get a user by the UserId from the collection",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This is the UserId in the MongoDB collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/users/username/{username}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user by username",
+        "description": "Delete a user by the userId from the collection",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This is the username for the user to delete in the MongoDB collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/users/email/{email}": {
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete user by email",
+        "description": "Delete a user by the email from the collection",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "username",
+            "description": "This is the email for the user to delete in the MongoDB collection",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get all users",
+        "description": "Get all the users from the collection",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -103,6 +201,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "requestBody": {
@@ -111,10 +215,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "username": {
+                  "email": {
                     "example": "any"
                   },
-                  "email": {
+                  "username": {
                     "example": "any"
                   },
                   "password": {
@@ -133,7 +237,7 @@
           "Users"
         ],
         "summary": "Get a user by email",
-        "description": "",
+        "description": "Search a user by the email",
         "parameters": [
           {
             "name": "email",
