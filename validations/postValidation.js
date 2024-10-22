@@ -6,7 +6,8 @@ const createPostValidation = (data) => {
         title: Joi.string().required().min(3).max(256),
         body: Joi.string().required().min(3),
         topic: Joi.string().required().valid('Politics', 'Health', 'Sport', 'Tech'),
-        expirationTime: Joi.number().positive().min(1).required()
+        expirationTime: Joi.number().positive().min(1).required(),
+        owner: Joi.string().required()
     });
     return schema.validate(data);
 }
@@ -19,6 +20,18 @@ const commentValidation = (data) => {
     return schema.validate(data);
 }
 
+// check if a post is still valid or it expired
+async function checkPostsExpirationTime(post) {
+    const currentTime = new Date();
+
+    if(currentTime >= post.expirationTime) {
+        return { expired: true }
+    }
+
+    return { expired: false, post}
+}
+
 // Exporting functions
 module.exports.createPostValidation = createPostValidation;
 module.exports.commentValidation = commentValidation;
+module.exports.checkPostsExpirationTime = checkPostsExpirationTime;
