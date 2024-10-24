@@ -1,0 +1,19 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+ARG DB_CONNECTOR
+ARG TOKEN_SECRET
+
+ENV DB_CONNECTOR=${DB_CONNECTOR}
+ENV TOKEB_SECRET=${TOKEN_SECRET}
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]

@@ -114,6 +114,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Dislike a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "67153b48d9fa9bcddc10769a"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            }
           }
         ],
         "responses": {
@@ -166,6 +183,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Like a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string",
+                  "example": "67153b48d9fa9bcddc10769a"
+                }
+              },
+              "required": [
+                "userId"
+              ]
+            }
           }
         ],
         "responses": {
@@ -191,6 +225,106 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/posts/{id}/comment": {
+      "post": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Add a new comment to a specific post",
+        "description": "Add a new comment to a specific post to the collection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The id of a posts from the collection"
+          },
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "New comment to a post",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "user": {
+                  "type": "string",
+                  "example": "67153b48d9fa9bcddc10769a"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "Comment"
+                }
+              },
+              "required": [
+                "user",
+                "comment"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/popular": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Returns the most popular post",
+        "description": "Returns the most popular post in the collection",
+        "parameters": [
+          {
+            "name": "auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }

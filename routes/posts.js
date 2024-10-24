@@ -20,13 +20,14 @@ router.get('/', async (req, res) => {
        #swagger.description = 'Get all the posts from the collection'
     */    
     const posts = await Posts.find()
-                             .populate('owner', 'username')
-                             .populate({
+                            .populate('owner', 'username')
+                            .populate({
                                 path: 'comments.user',
-                                select: 'username -_id'
-                             })
-                             .lean()
-                             .exec();
+                                select: 'user -_id'
+                            })
+                            .lean()
+                            .exec();
+
     if(!posts){
         return req.status(404).json({ error: 'No posts found' })
     }
@@ -37,7 +38,7 @@ router.get('/', async (req, res) => {
             return {
                 _id: comment._id,
                 comment: comment.comment,
-                user: comment.user.username,
+                user: comment.user,
                 timestamp: comment.timestamp
             }
         })
@@ -55,13 +56,14 @@ router.get('/:topic', async (req, res) => {
        #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
     */
     const posts = await Posts.find({ topic: req.params.topic })
-                             .populate('owner', 'username')
-                             .populate({
+                            .populate('owner', 'username')
+                            .populate({
                                 path: 'comments.user',
-                                select: 'username -_id'
-                             })
-                             .lean()
-                             .exec();
+                                select: 'user -_id'
+                            })
+                            .lean()
+                            .exec();
+
     if(!posts){
         return req.status(404).json({ error: 'No posts found' })
     }
@@ -72,7 +74,7 @@ router.get('/:topic', async (req, res) => {
             return {
                 _id: comment._id,
                 comment: comment.comment,
-                user: comment.user.username,
+                user: comment.user,
                 timestamp: comment.timestamp
             }
         })
@@ -113,15 +115,8 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id/dislike', verifyToken, async (req, res) => {
-    /*
-       #swagger.tags = ['Posts']
-       #swagger.path = '/api/posts/{id}/dislike'
-       #swagger.summary = 'Add a new dislike to a specific post'
-       #swagger.description = 'Add a new dislike to a specific post to the collection'
-       #swagger.parameters['id'] = { description: 'The id of a posts from the collection' }
-    */
-    const postId = req.params.id;
+// common function for retrieve and check the validity of a post
+var retrieveAndCheckPost = async function(postId) {
     const postToUpdate = await Posts.findById(postId).populate('likes');
 
     if(postToUpdate.status == expiredText) {
@@ -135,6 +130,61 @@ router.put('/:id/dislike', verifyToken, async (req, res) => {
 
         return res.status(400).json({ error: errorExpired })
     }
+
+    return postToUpdate;
+}
+
+router.put('/:id/dislike', verifyToken, async (req, res) => {
+    /*
+       #swagger.tags = ['Posts']
+       #swagger.path = '/api/posts/{id}/dislike'
+       #swagger.summary = 'Add a new dislike to a specific post'
+       #swagger.description = 'Add a new dislike to a specific post to the collection'
+       #swagger.parameters['id'] = { description: 'The id of a posts from the collection' }
+       #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Dislike a post',
+            schema: {
+                $userId: '67153b48d9fa9bcddc10769a'
+            }
+        } 
+    */
+    const postId = req.params.id;
+    const postToUpdate = await retrieveAndCheckPost(postId);
+
+    const userId = req.body.userId;
+    if(postToUpdate.owner == userId) {
+        return res.status(400).json({ error: 'You cannot dislike your own post.' });
+    }
+
+    const arrLikes = postToUpdate.likes.filter((item) => item._id == userId);
+    if(arrLikes.length == 0) {
+        await Posts.updateOne({ $push: { likes: userId }});
+        const updatedPost = await Posts.findById(postId);
+        res.status(200).json(updatedPost);
+    }
+    else {
+        res.status(400).json({ error: 'You already disliked this post' })
+    }
+})
+
+router.put('/:id/like', verifyToken, async (req, res) => {
+    /*
+       #swagger.tags = ['Posts']
+       #swagger.path = '/api/posts/{id}/like'
+       #swagger.summary = 'Add a new like to a specific post'
+       #swagger.description = 'Add a new like to a specific post to the collection'
+       #swagger.parameters['id'] = { description: 'The id of a posts from the collection' }
+       #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Like a post',
+            schema: {
+                $userId: '67153b48d9fa9bcddc10769a'
+            }
+        } 
+    */
+    const postId = req.params.id;
+    const postToUpdate = await retrieveAndCheckPost(postId);
 
     const userId = req.body.userId;
     if(postToUpdate.owner == userId) {
@@ -152,43 +202,62 @@ router.put('/:id/dislike', verifyToken, async (req, res) => {
     }
 })
 
-router.put('/:id/like', verifyToken, async (req, res) => {
+router.post('/:id/comment', verifyToken, async(req, res) => {
     /*
        #swagger.tags = ['Posts']
-       #swagger.path = '/api/posts/{id}/like'
-       #swagger.summary = 'Add a new like to a specific post'
-       #swagger.description = 'Add a new like to a specific post to the collection'
+       #swagger.path = '/api/posts/{id}/comment'
+       #swagger.summary = 'Add a new comment to a specific post'
+       #swagger.description = 'Add a new comment to a specific post to the collection'
        #swagger.parameters['id'] = { description: 'The id of a posts from the collection' }
+       #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'New comment to a post',
+            schema: {
+                $user: '67153b48d9fa9bcddc10769a',
+                $comment: 'Comment'
+            }
+        } 
     */
     const postId = req.params.id;
-    const postToUpdate = await Posts.findById(postId).populate('likes');
+    const postToUpdate = await retrieveAndCheckPost(postId);
 
-    if(postToUpdate.status == expiredText) {
-        return res.status(400).json({ error: errorExpired })
+    const commentToAdd = req.body.comment;
+    if(commentToAdd.length == 0) {
+        return res.status(400).json({ error: 'The text of the comment must be specified' });
     }
 
-    const { expired } = await checkPostsExpirationTime(postToUpdate);
-    if(expired) {
-        postToUpdate.status = expiredText;
-        postToUpdate.save();
+    await Posts.updateOne({ $push: { comments: req.body }});
+    const updatedPost = await Posts.findById(postId);
+    res.status(200).json(updatedPost);
+})
 
-        return res.status(400).json({ error: errorExpired })
+router.get('/popular', verifyToken, async (req, res) => {
+    /*
+       #swagger.tags = ['Posts']
+       #swagger.path = '/api/posts/popular'
+       #swagger.summary = 'Returns the most popular post'
+       #swagger.description = 'Returns the most popular post in the collection'
+    */
+
+       res.status(200).json({ success: 'Hello' })
+    const posts = await Posts.find()
+                            .populate('owner', 'username')
+                            .populate({
+                                path: 'comments.user',
+                                select: 'user -_id'
+                            })
+                            .lean()
+                            .exec();
+
+                            console.log(posts);
+                            console.log(posts.length);
+    if(posts.length == 0) {
+        return res.status(400).json({ error: 'No posts found' });
     }
 
-    const userId = req.body.userId;
-    if(postToUpdate.owner == userId) {
-        return res.status(400).json({ error: 'You cannot like your own post.' });
-    }
-
-    const arrLikes = postToUpdate.likes.filter((item) => item._id == userId);
-    if(arrLikes.length == 0) {
-        await Posts.updateOne({ $push: { likes: userId }});
-        const updatedPost = await Posts.findById(postId);
-        res.status(200).json(updatedPost);
-    }
-    else {
-        res.status(400).json({ error: 'You already liked this post' })
-    }
+    //const sortedPosts = posts.sort((a,b) => (b.likes.length + b.dislikes.length) - (a.likes.length + a.dislikes.length));
+    //const popularPost = sortedPosts[0] || null;
+    res.status(200).json(posts);
 })
 
 module.exports = router;

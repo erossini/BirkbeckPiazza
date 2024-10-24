@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Piazza",
     "collectionId": "8a2ac410-6441-4c69-a01a-215630ec6921",
-    "dateExported": "2024-10-22T14:29:21.165Z",
+    "dateExported": "2024-10-24T09:00:41.269Z",
     "version": "1.2",
     "folders": [
         {
@@ -55,11 +55,11 @@
             "method": "GET",
             "sortNum": 50000,
             "created": "2024-10-20T12:51:47.922Z",
-            "modified": "2024-10-21T14:56:26.079Z",
+            "modified": "2024-10-24T08:58:13.800Z",
             "headers": [
                 {
                     "name": "auth-token",
-                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzE2MzMzMzc4ZjhhYTVkYmQ1NmYxODAiLCJpYXQiOjE3Mjk1MjI1NDF9.1VbFs1LkDJAVxoGWClQbbk5rptp10Jjak09lm3TBlog"
+                    "value": "{{token}}"
                 }
             ],
             "docs": "This is an example of the response of this call. The call returns all the users in the database.\n\n```\n[\n  {\n    \"_id\": \"6714fec0f0078e119daed2bf\",\n    \"username\": \"test\",\n    \"email\": \"erossi03@student.birkbeck.ac.uk\",\n    \"password\": \"Test!2024\",\n    \"createdAt\": \"2024-10-20T12:59:44.774Z\",\n    \"__v\": 0\n  },\n  {\n    \"_id\": \"6714ff7ce59b3af2b2bf52fa\",\n    \"username\": \"test\",\n    \"email\": \"enrico.rossini.uk@live.com\",\n    \"password\": \"Test!2024\",\n    \"createdAt\": \"2024-10-20T13:02:52.164Z\",\n    \"__v\": 0\n  }\n]\n```"
@@ -73,8 +73,13 @@
             "method": "GET",
             "sortNum": 60000,
             "created": "2024-10-20T12:58:14.542Z",
-            "modified": "2024-10-20T13:00:25.528Z",
-            "headers": []
+            "modified": "2024-10-24T08:58:30.213Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "2548e0fd-cc8b-4299-a434-f3286cfaee6e",
@@ -85,8 +90,13 @@
             "method": "POST",
             "sortNum": 65000,
             "created": "2024-10-21T15:25:24.059Z",
-            "modified": "2024-10-22T13:32:29.093Z",
-            "headers": [],
+            "modified": "2024-10-24T09:00:27.898Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"title\": \"Title test3\",\n  \"body\": \"This is a short body for the post.\",\n  \"topic\": \"Tech\",\n  \"owner\": \"6716333378f8aa5dbd56f180\",\n  \"expirationTime\": 3600\n}",
@@ -102,8 +112,13 @@
             "method": "GET",
             "sortNum": 70000,
             "created": "2024-10-20T13:11:14.814Z",
-            "modified": "2024-10-20T13:11:39.728Z",
-            "headers": []
+            "modified": "2024-10-24T08:58:40.540Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "488d3423-b05e-464f-9ac4-6fa7d22dc0c9",
@@ -114,8 +129,13 @@
             "method": "DELETE",
             "sortNum": 90000,
             "created": "2024-10-20T16:48:16.404Z",
-            "modified": "2024-10-20T16:58:21.673Z",
-            "headers": []
+            "modified": "2024-10-24T08:58:50.466Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "dd6845b4-aaec-4608-95c6-bdd671ab3ac1",
@@ -126,8 +146,13 @@
             "method": "DELETE",
             "sortNum": 100000,
             "created": "2024-10-20T16:58:07.029Z",
-            "modified": "2024-10-20T16:58:49.613Z",
-            "headers": []
+            "modified": "2024-10-24T08:59:04.498Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "6ffcf8ab-087e-4640-96bc-c4ad8950b719",
@@ -138,8 +163,13 @@
             "method": "DELETE",
             "sortNum": 110000,
             "created": "2024-10-20T17:05:36.694Z",
-            "modified": "2024-10-20T17:05:57.902Z",
-            "headers": []
+            "modified": "2024-10-24T08:59:12.417Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "c477d4ee-1703-47fb-9575-f8d84b1259dd",
@@ -192,8 +222,13 @@
             "method": "PUT",
             "sortNum": 150000,
             "created": "2024-10-22T10:39:34.943Z",
-            "modified": "2024-10-22T10:45:43.148Z",
-            "headers": [],
+            "modified": "2024-10-24T08:59:25.247Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\"\n}",
@@ -201,5 +236,5 @@
             }
         }
     ],
-    "ref": "PLsxRSaGo6jJsx5GZwyjjrQCi8lm9-GeNqCX6LQ5hKqR5cZs-XQQ_e4waOSSAaEZtnhGw_pqdnj85_u2Z6oRWg"
+    "ref": "PLsxRSaGo6jJsx5GZwyjjpnDibzz-VzbCwUS5Lo6VhU-0hZ7EbagpnI9ppLxeyiUa33TJy7VNxe7ibMHLMVO4g"
 }
