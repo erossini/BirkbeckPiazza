@@ -65,7 +65,7 @@ router.get('/:topic', async (req, res) => {
                             .exec();
 
     if(!posts){
-        return req.status(404).json({ error: 'No posts found' })
+        return res.status(404).json({ error: 'No posts found' })
     }
 
     posts.forEach(post => {
@@ -82,6 +82,46 @@ router.get('/:topic', async (req, res) => {
 
     res.status(200).json(posts);
 });
+
+router.get('/popular/:topic', async (req, res) => {
+    /*
+       #swagger.tags = ['Posts']
+       #swagger.path = '/api/posts/popular/{topic}'
+       #swagger.summary = 'Returns the most popular post for a topic'
+       #swagger.description = 'Returns the most popular post for a topic in the collection'
+       #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
+    */
+    const posts = await Posts.find({ topic: req.params.topic });
+
+    if(!posts){
+        return req.status(404).json({ error: 'No posts found' })
+    }
+
+    const sortedPosts = posts.sort((a,b) => 
+        (b.likes.length + b.dislikes.length + b.comments.length) - 
+        (a.likes.length + a.dislikes.length + a.comments.length))
+
+    const popular = sortedPosts[0] || null;
+
+    res.status(200).json(popular);
+});
+
+router.get('/expired/:topic', verifyToken, async (req, res) => {
+    /*
+       #swagger.tags = ['Posts']
+       #swagger.path = '/api/posts/popular/{topic}'
+       #swagger.summary = 'Returns the expired posts for a topic'
+       #swagger.description = 'Returns the expired posts for a topic in the collection'
+       #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
+    */
+    const expiredPosts = await Posts.find({ topic: req.params.topic, status: 'Expired' });
+    if(!expiredPosts) {
+        res.status(400).json({ error: 'No posts found' });
+    }
+    else {
+        res.status(200).json(expiredPosts);
+    }
+})
 
 router.post('/', async (req, res) => {
     /*
@@ -229,35 +269,6 @@ router.post('/:id/comment', verifyToken, async(req, res) => {
     await Posts.updateOne({ $push: { comments: req.body }});
     const updatedPost = await Posts.findById(postId);
     res.status(200).json(updatedPost);
-})
-
-router.get('/popular', verifyToken, async (req, res) => {
-    /*
-       #swagger.tags = ['Posts']
-       #swagger.path = '/api/posts/popular'
-       #swagger.summary = 'Returns the most popular post'
-       #swagger.description = 'Returns the most popular post in the collection'
-    */
-
-       res.status(200).json({ success: 'Hello' })
-    const posts = await Posts.find()
-                            .populate('owner', 'username')
-                            .populate({
-                                path: 'comments.user',
-                                select: 'user -_id'
-                            })
-                            .lean()
-                            .exec();
-
-                            console.log(posts);
-                            console.log(posts.length);
-    if(posts.length == 0) {
-        return res.status(400).json({ error: 'No posts found' });
-    }
-
-    //const sortedPosts = posts.sort((a,b) => (b.likes.length + b.dislikes.length) - (a.likes.length + a.dislikes.length));
-    //const popularPost = sortedPosts[0] || null;
-    res.status(200).json(posts);
 })
 
 module.exports = router;

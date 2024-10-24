@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Piazza",
     "collectionId": "8a2ac410-6441-4c69-a01a-215630ec6921",
-    "dateExported": "2024-10-24T09:00:41.269Z",
+    "dateExported": "2024-10-24T11:33:13.137Z",
     "version": "1.2",
     "folders": [
         {
@@ -202,16 +202,33 @@
             "headers": []
         },
         {
-            "_id": "c1e9c6ff-4293-4753-9c92-d6aa834b3c2e",
+            "_id": "8f5586a0-6ff7-404b-abd8-3cbe1507424e",
             "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
             "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
             "name": "Get all posts for a topic",
             "url": "{{url}}/api/posts/Tech",
             "method": "GET",
-            "sortNum": 140000,
-            "created": "2024-10-21T15:30:52.065Z",
-            "modified": "2024-10-21T15:36:55.084Z",
+            "sortNum": 145000,
+            "created": "2024-10-24T10:31:46.533Z",
+            "modified": "2024-10-24T11:16:39.373Z",
             "headers": []
+        },
+        {
+            "_id": "c1e9c6ff-4293-4753-9c92-d6aa834b3c2e",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Get popular post",
+            "url": "{{url}}/api/posts/popular/Tech",
+            "method": "GET",
+            "sortNum": 147500,
+            "created": "2024-10-21T15:30:52.065Z",
+            "modified": "2024-10-24T11:20:29.620Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
         },
         {
             "_id": "09468ec4-8720-4b64-8815-d8dcf73a7363",
@@ -234,7 +251,68 @@
                 "raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\"\n}",
                 "form": []
             }
+        },
+        {
+            "_id": "b2fdbdf2-cb24-4d87-b622-20d09592e72f",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Get expired posts",
+            "url": "{{url}}/api/posts/expired/Tech",
+            "method": "GET",
+            "sortNum": 157500,
+            "created": "2024-10-24T11:29:17.072Z",
+            "modified": "2024-10-24T11:29:34.575Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ]
+        },
+        {
+            "_id": "8a81475d-027d-42e5-853e-b57c9941e439",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Disike a post",
+            "url": "{{url}}/api/posts/67176eecfc02abe66787e430/dislike",
+            "method": "PUT",
+            "sortNum": 160000,
+            "created": "2024-10-24T10:19:43.223Z",
+            "modified": "2024-10-24T10:20:21.952Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "37eac96c-d84a-4c6a-8c79-811cc032847a",
+            "colId": "8a2ac410-6441-4c69-a01a-215630ec6921",
+            "containerId": "17aff91f-6f19-42fa-8786-102f5b1287ac",
+            "name": "Add a new comment for a post",
+            "url": "{{url}}/api/posts/67176eecfc02abe66787e430/comment",
+            "method": "POST",
+            "sortNum": 170000,
+            "created": "2024-10-24T10:20:38.394Z",
+            "modified": "2024-10-24T10:22:33.559Z",
+            "headers": [
+                {
+                    "name": "auth-token",
+                    "value": "{{token}}"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\",\n  \"comment\": \"This is a new comment\"\n}",
+                "form": []
+            }
         }
     ],
-    "ref": "PLsxRSaGo6jJsx5GZwyjjpnDibzz-VzbCwUS5Lo6VhU-0hZ7EbagpnI9ppLxeyiUa33TJy7VNxe7ibMHLMVO4g"
+    "ref": "PLsxRSaGo6jJsx5GZwyjjpneklX8l6Sq_wXQ1BVQv0L9ht-9_Y8BromIG69_V7gZDD-ZTbQa914kTxI-DhvT2g"
 }
