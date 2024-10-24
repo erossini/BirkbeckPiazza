@@ -38,4 +38,4 @@ jobs:
 
       - name: Deploy to Google App Engine
         run: |
-          gcloud app deploy node.yaml --quiet
+          gcloud app deploy node.js.yml --quiet
