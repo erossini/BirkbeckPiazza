@@ -99,6 +99,31 @@
         "tags": [
           "Posts"
         ],
+        "summary": "Returns the most popular post for a topic",
+        "description": "Returns the most popular post for a topic in the collection",
+        "parameters": [
+          {
+            "name": "topic",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "This is the topic to filter the posts from the collection"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/posts/expired/{topic}": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
         "summary": "Returns the expired posts for a topic",
         "description": "Returns the expired posts for a topic in the collection",
         "parameters": [

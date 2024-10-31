@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
        #swagger.summary = 'Get all posts'
        #swagger.description = 'Get all the posts from the collection'
     */    
-    const posts = await Posts.find()
+    const posts = await Posts.find({ status: 'Live' })
                             .populate('owner', 'username')
                             .populate({
                                 path: 'comments.user',
@@ -55,7 +55,7 @@ router.get('/:topic', async (req, res) => {
        #swagger.description = 'Get all the posts from the collection'
        #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
     */
-    const posts = await Posts.find({ topic: req.params.topic })
+    const posts = await Posts.find({ status: 'Live', topic: req.params.topic })
                             .populate('owner', 'username')
                             .populate({
                                 path: 'comments.user',
@@ -91,7 +91,7 @@ router.get('/popular/:topic', async (req, res) => {
        #swagger.description = 'Returns the most popular post for a topic in the collection'
        #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
     */
-    const posts = await Posts.find({ topic: req.params.topic });
+    const posts = await Posts.find({ status: 'Live', topic: req.params.topic });
 
     if(!posts){
         return req.status(404).json({ error: 'No posts found' })
@@ -109,12 +109,12 @@ router.get('/popular/:topic', async (req, res) => {
 router.get('/expired/:topic', verifyToken, async (req, res) => {
     /*
        #swagger.tags = ['Posts']
-       #swagger.path = '/api/posts/popular/{topic}'
+       #swagger.path = '/api/posts/expired/{topic}'
        #swagger.summary = 'Returns the expired posts for a topic'
        #swagger.description = 'Returns the expired posts for a topic in the collection'
        #swagger.parameters['topic'] = { description: 'This is the topic to filter the posts from the collection' }
     */
-    const expiredPosts = await Posts.find({ topic: req.params.topic, status: 'Expired' });
+    const expiredPosts = await Posts.find({ status: 'Expired', topic: req.params.topic });
     if(!expiredPosts) {
         res.status(400).json({ error: 'No posts found' });
     }

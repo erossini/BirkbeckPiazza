@@ -9,7 +9,7 @@ const jsonwebtoken = require('jsonwebtoken')
 
 router.post('/login', async (req, res) => {
     /*
-       #swagger.tags = ['Authentication']
+       #swagger.tags = ['Auth']
        #swagger.path = '/api/auth/login'
        #swagger.summary = 'Login in the application'
        #swagger.description = 'Login in the application to obtain the JWT token to use in the next calls'

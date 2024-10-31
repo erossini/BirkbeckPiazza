@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "81ce7ceb-ce87-4a64-849c-dabf4ed37ee4",
+		"name": "Piazza",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "671135"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"test6\",\n  \"password\": \"Enrico!1975\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get all posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Title test3\",\n  \"body\": \"This is a short body for the post.\",\n  \"topic\": \"Tech\",\n  \"owner\": \"6716333378f8aa5dbd56f180\",\n  \"expirationTime\": 3600\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/posts",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get popular post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/posts/popular/Tech",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"popular",
+								"Tech"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like a post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/posts/67176eecfc02abe66787e430/like",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"67176eecfc02abe66787e430",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disike a post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/posts/67176eecfc02abe66787e430/dislike",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"67176eecfc02abe66787e430",
+								"dislike"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new comment for a post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"67153b48d9fa9bcddc10769a\",\n  \"comment\": \"This is a new comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/posts/67176eecfc02abe66787e430/comment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"67176eecfc02abe66787e430",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all posts for a topic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/posts/Tech",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"Tech"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get expired posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/posts/expired/Tech",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								"expired",
+								"Tech"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register a new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"enrico.rossini£@live.com\",\n  \"username\": \"test6\",\n  \"password\": \"Enrico!1975\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/6714fec0f0078e119daed2bf",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"6714fec0f0078e119daed2bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by Email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/searchByEmail/enrico.rossini.uk@live.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"searchByEmail",
+								"enrico.rossini.uk@live.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by Id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/test",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by username",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/username/test",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"username",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user by email",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "auth-token",
+								"value": "{{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/users/email/enrico.rossini.uk@live.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"email",
+								"enrico.rossini.uk@live.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

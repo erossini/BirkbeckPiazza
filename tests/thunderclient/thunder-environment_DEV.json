@@ -2,13 +2,17 @@
     "clientName": "Thunder Client",
     "environmentName": "DEV",
     "environmentId": "684f08ec-6309-4cbe-bf7a-749e1a6df63b",
-    "dateExported": "2024-10-20T11:02:19.460Z",
+    "dateExported": "2024-10-31T14:36:53.688Z",
     "version": "1.2",
     "variables": [
         {
             "name": "url",
-            "value": "http://localhost:3000"
+            "value": "http://34.39.30.22:8080"
+        },
+        {
+            "name": "token",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzE2MzMzMzc4ZjhhYTVkYmQ1NmYxODAiLCJpYXQiOjE3Mjk3NjAyMjd9.cUfSoegZ0H_rlV4kAtwEeJIP3M43Rn2V22b7whSsFRM"
         }
     ],
-    "ref": "OhjqpfL8JMQw0KR_eTRjWSFfhM7fNy2wEkTWSOkd25Co22E-HE8dEHesFpYznmzd"
+    "ref": "OhjqpfL8JMQw0KR_eTRjWY_Y2xs1_3MaJ8FQ8h7TzRdYZoJD6cRi07zhGaAqTqme"
 }
